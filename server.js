@@ -6,7 +6,7 @@ const cors = require("cors");
 const cookieParser = require("cookie-parser");
 
 const corsOptions = {
-  origin: "http://localhost:3000",
+  origin: process.env.CORS,
   credentials: true,
 };
 
@@ -18,7 +18,5 @@ app.use(express.json());
 app.use("/api", routes);
 
 db.sync({ force: false }).then(() => {
-  app.listen(3001, () => {
-    console.log("listening on port 3001");
-  });
+  app.listen(process.env.DB_PORT || 3001);
 });
